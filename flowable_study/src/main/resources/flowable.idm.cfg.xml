@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans   http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="idmEngineConfiguration" class="org.flowable.idm.engine.IdmEngineConfiguration">
+        <property name="dataSource" ref="dataSource"></property>
+        <property name="databaseSchemaUpdate" value="true"></property>
+    </bean>
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
+        <property name="driverClassName">
+            <value>com.mysql.jdbc.Driver</value>
+        </property>
+        <property name="url">
+<!--            spring.datasource.url=jdbc:mysql://127.0.0.1:3000/abc?useUnicode=true&characterEncoding=UTF-8&serverTimezone=CTT&zeroDateTimeBehavior=convertToNull&useSSL=false-->
+
+
+<!--            -&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;-->
+<!--            作者：Alex老夫子-->
+<!--            来源：CSDN-->
+<!--            原文：https://blog.csdn.net/msn465780/article/details/87778425-->
+<!--            版权声明：本文为博主原创文章，转载请附上博文链接！-->
+            <value>jdbc:mysql://localhost:3306/my_flowable?useUnicode=true&amp;characterEncoding=UTF-8&amp;serverTimezone=CTT&amp;zeroDateTimeBehavior=convertToNull&amp;useSSL=false
+<!--            <value>jdbc:mysql://localhost:3306/my_flowable?useUnicode=true&amp;characterEncoding=UTF-8-->
+            </value>
+        </property>
+        <property name="username">
+            <value>root</value>
+        </property>
+        <property name="password" value="12345678"/>
+    </bean>
+</beans>
+
+

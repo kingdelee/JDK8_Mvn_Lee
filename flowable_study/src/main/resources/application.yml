@@ -1,0 +1,43 @@
+spring:
+  datasource:
+    customer:
+  #    name: test
+  #    url: jdbc:mysql://rm-2ze89v2lo60myyqf9fo.mysql.rds.aliyuncs.com:3306/oa?useUnicode=true&characterEncoding=gbk&zeroDateTimeBehavior=convertToNull
+  #    username: chetubao
+  #    password: Beijing2017
+      url: jdbc:mysql://localhost:3306/my_flowable?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull
+      username: root
+      password: 12345678
+      type: com.alibaba.druid.pool.DruidDataSource
+      driver-class-name: com.mysql.jdbc.Driver
+      filters: stat
+      maxActive: 20
+      initialSize: 1
+      maxWait: 60000
+      minIdle: 1
+      timeBetweenEvictionRunsMillis: 60000
+      minEvictableIdleTimeMillis: 300000
+      validationQuery: select 'x'
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      poolPreparedStatements: true
+      maxOpenPreparedStatements: 20
+  http:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+mybatis:
+  #  typeAliasesPackage:com.example.demo.Dao
+  mapperLocations: classpath:mapper/hudong/*.xml,classpath:mapper/*.xml
+  configuration:
+      log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+server:
+  port: 8112
+  tomcat:
+    uri-encoding: UTF-8
+

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration  scan="true" scanPeriod="60 seconds" debug="false">
+    <contextName>logback</contextName>
+
+    <property name="LOG_HOME" value="./logs" />
+
+    <!-- 控制台输出 -->
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <!-- 日志输出编码 -->
+        <Encoding>UTF-8</Encoding>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符-->
+<!--            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] .%M %L %-5level %logger{50} - %msg%n</pattern>-->
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern>
+        </layout>
+    </appender>
+
+    <!-- 按照每天生成日志文件 -->
+    <appender name="dailyLog"  class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <Encoding>UTF-8</Encoding>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--日志文件输出的文件名-->
+            <FileNamePattern>${LOG_HOME}/dailyLog.%d{yyyy-MM-dd}.log</FileNamePattern>
+            <MaxHistory>30</MaxHistory>
+        </rollingPolicy>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符-->
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern>
+        </layout>
+        <!--日志文件最大的大小-->
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <MaxFileSize>50MB</MaxFileSize>
+        </triggeringPolicy>
+    </appender>
+
+
+    <logger name="java.sql.Connection" level="DEBUG"/>
+    <logger name="java.sql.Statement" level="DEBUG"/>
+
+    <logger name="com.codahale.metrics" level="WARN"/>
+    <logger name="com.ryantenney" level="WARN"/>
+    <logger name="com.zaxxer" level="WARN"/>
+    <logger name="org.apache" level="WARN"/>
+
+    <!-- show parameters for hibernate sql 专为 Hibernate 定制 -->
+    <logger name="org.hibernate.type.descriptor.sql.BasicBinder"  level="TRACE" />
+    <logger name="org.hibernate.type.descriptor.sql.BasicExtractor"  level="DEBUG" />
+    <logger name="org.hibernate.SQL" level="DEBUG" />
+    <logger name="org.hibernate.type" level="TRACE" />
+    <logger name="org.hibernate.engine.QueryParameters" level="DEBUG" />
+    <logger name="org.hibernate.engine.query.HQLQueryPlan" level="DEBUG" />
+
+    <logger name="org.hibernate" level="WARN"/>
+    <logger name="org.hibernate.engine.internal" level="WARN"/>
+    <logger name="org.hibernate.validator" level="WARN"/>
+
+    <logger name="org.springframework" level="WARN"/>
+    <logger name="org.springframework.test" level="DEBUG"/>
+    <logger name="org.springframework.web" level="WARN"/>
+    <logger name="org.springframework.security" level="WARN"/>
+
+    <logger name="org.flowable.engine.impl.persistence.entity" level="DEBUG"/>
+    <logger name="org.flowable.task.service.impl.persistence.entity" level="DEBUG"/>
+    <logger name="org.flowable.variable.service.impl.persistence.entity" level="DEBUG"/>
+    <logger name="org.flowable.identitylink.service.impl.persistence.entity" level="DEBUG"/>
+    <logger name="org.flowable.job.service.impl.persistence.entity" level="DEBUG"/>
+
+
+    <root level="debug,ERROR">
+        <appender-ref ref="console" />
+        <appender-ref ref="dailyLog" />
+        <!--<appender-ref ref="logFile" />-->
+    </root>
+
+</configuration>
